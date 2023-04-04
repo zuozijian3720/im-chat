@@ -18,6 +18,7 @@ export const useConfig = (): RemovableRef<GlobalConfig> => {
     localStorage,
     {
       deep: true,
+      mergeDefaults: true,
     }
   );
 };

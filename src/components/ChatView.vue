@@ -88,6 +88,7 @@
         </n-button>
       </n-space>
       <n-input
+        :disabled="noAPIKey"
         ref="inputRef"
         v-model:value.trim="text"
         type="textarea"
@@ -99,7 +100,7 @@
           minRows: 2,
           maxRows: 15,
         }"
-        placeholder="输入你想说的"
+        :placeholder="noAPIKey ? '请先设置 APIKey' : '输入你想说的'"
         @blur="blur"
         @keydown="inputHotKey($event)"
       >
@@ -124,6 +125,7 @@ const scrollContainer = ref<HTMLDivElement>();
 
 const isRoot = computed(() => chat.current.value == null);
 const scroll = useScroll(scrollContainer);
+const noAPIKey = computed(() => !chat.config.value.apiKey);
 const blur = () => {
   // setTimeout(() => {
   //   inputRef.value?.focus()
