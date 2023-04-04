@@ -171,7 +171,7 @@ onMounted(() => {
           size="tiny"
           mr-2
           dashed
-          @click="message.abort.abort()"
+          @click="message.abort?.abort()"
         >
           <template #icon>
             <n-spin size="small"></n-spin>
