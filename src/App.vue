@@ -4,8 +4,8 @@ import {
   NConfigProvider,
   NDialogProvider,
 } from "naive-ui";
-import ImChat from "./ImChat.vue";
-
+import { provideTreeChat } from "./logic/TreeChat";
+const chat = provideTreeChat();
 const themeOverrides: GlobalThemeOverrides = {
   common: {
     fontSize: "12px",
@@ -47,7 +47,7 @@ const themeOverrides: GlobalThemeOverrides = {
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
     <n-dialog-provider>
-      <im-chat></im-chat>
+      <router-view></router-view>
     </n-dialog-provider>
   </n-config-provider>
 </template>

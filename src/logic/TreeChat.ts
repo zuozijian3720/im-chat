@@ -12,6 +12,7 @@ type GPTInfo = {
 export type MessageNode = {
   id: string;
   isNew: boolean;
+  shareId?: string;
   parent?: string;
   children: string[];
   message: Message;
@@ -189,5 +190,13 @@ const useTreeChat = () => {
     config,
     deleteMessage,
     getSetting,
+    isExist(id: string) {
+      return !!treeChat.value[id];
+    },
+    load(data: MessageNode[]) {
+      data.forEach((msg) => {
+        treeChat.value[msg.id] = msg;
+      });
+    },
   };
 };

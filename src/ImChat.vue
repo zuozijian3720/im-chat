@@ -13,9 +13,9 @@ import { computed } from "vue";
 import RootView from "./components/RootView.vue";
 import BeforeView from "./components/PromptView.vue";
 import AfterView from "./components/ChatView.vue";
-import { provideTreeChat } from "./logic/TreeChat";
+import { injectTreeChat } from "./logic/TreeChat";
 
-const chat = provideTreeChat();
+const chat = injectTreeChat();
 const isRoot = computed(() => {
   return chat.current.value == null;
 });

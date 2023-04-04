@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, h, onMounted, ref } from "vue";
 import { useElementHover } from "@vueuse/core";
 import { injectTreeChat, MessageNode } from "../logic/TreeChat";
-import { useDialog } from "naive-ui";
+import { NSpin, useDialog } from "naive-ui";
+import axios from "axios";
+import ShareLink from "./ShareLink.vue";
 
 const props = defineProps<{
   message: MessageNode;
@@ -12,6 +14,7 @@ const container = ref<HTMLDivElement>();
 const hover = useElementHover(container);
 const chat = injectTreeChat();
 const dialog = useDialog();
+
 const ops = computed<
   {
     icon: string;
@@ -23,11 +26,41 @@ const ops = computed<
 >(() => {
   return [
     {
+      icon: "i-ph-share-network-light",
+      tips: "分享",
+      size: "text-18px",
+      onClick: async () => {
+        const urlRef = ref<string>("");
+        const getShareId = async (): Promise<string> => {
+          const result = await axios.post(
+            "https://jpzrg8mqpi.hk.aircode.run/share",
+            {
+              data: chat.getBeforeChat(props.message.id),
+            }
+          );
+          return result.data.id;
+        };
+        dialog.create({
+          title: "分享",
+          icon: () => h("div", { class: "i-ph-share-network-light" }),
+          content: () => h(ShareLink, { url: urlRef.value }),
+        });
+        const shareId = props.message.shareId ?? (await getShareId());
+        const url = new URL(location.origin);
+        url.pathname = "/share";
+        url.searchParams.set("id", shareId);
+        urlRef.value = url.href;
+        props.message.shareId = shareId;
+      },
+    },
+    {
       icon: "i-ic-round-star-outline",
       tips: "收藏成 prompt",
       size: "text-20px",
       onClick: () => {
-        alert("未实现");
+        dialog.info({
+          title: "未实现",
+        });
         console.log(props.message.gptInfo);
       },
     },
@@ -155,7 +188,7 @@ onMounted(() => {
                   hover="bg-gray200"
                   transition
                   cursor="pointer"
-                  @click.prevent.stop="v.onClick"
+                  @click.prevent.stop="v.onClick()"
                 >
                   <div :class="[v.icon, 'text-gray-400', v.size]"></div>
                 </div>

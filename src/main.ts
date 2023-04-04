@@ -1,10 +1,8 @@
 import { createApp } from "vue";
 import "uno.css";
 import {
-  // create naive ui
   create,
   NAvatar,
-  // component
   NButton,
   NCard,
   NDivider,
@@ -25,6 +23,10 @@ import {
   NTooltip,
 } from "naive-ui";
 import App from "./App.vue";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import ImChat from "./ImChat.vue";
+import Share from "./Share.vue";
+
 const naive = create({
   components: [
     NButton,
@@ -49,4 +51,12 @@ const naive = create({
   ],
 });
 
-createApp(App).use(naive).mount("#app");
+const routes: RouteRecordRaw[] = [
+  { path: "/", component: ImChat },
+  { path: "/share", component: Share },
+];
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
+createApp(App).use(naive).use(router).mount("#app");

@@ -10,7 +10,7 @@
         hover="b-gray"
         transition-all
         bg-white
-        p-2˚
+        p-2
         rd-2
         cursor="pointer"
         :class="[i != 0 && 'mt-2']"
