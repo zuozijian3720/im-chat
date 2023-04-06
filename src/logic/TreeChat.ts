@@ -162,9 +162,7 @@ const useTreeChat = () => {
   };
   const deleteMessage = (id: string) => {
     const node = treeChat.value[id];
-    if (current.value === id) {
-      current.value = node.parent;
-    }
+    const parentId = node.parent;
     if (node.parent) {
       const parent = treeChat.value[node.parent];
       parent.children = parent.children.filter((v) => v !== id);
@@ -172,6 +170,9 @@ const useTreeChat = () => {
       roots.value = roots.value.filter((v) => v !== id);
     }
     const deleteChildren = (id: string) => {
+      if (id === current.value) {
+        current.value = parentId;
+      }
       const node = treeChat.value[id];
       node.children.forEach(deleteChildren);
       delete treeChat.value[id];
