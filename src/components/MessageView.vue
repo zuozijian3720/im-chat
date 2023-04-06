@@ -122,7 +122,12 @@ const abort = () => {
 };
 </script>
 <template>
-  <div class="flex" w-full relative>
+  <div
+    class="flex"
+    w-full
+    relative
+    :class="[message.message.role === 'assistant' && 'pt-1']"
+  >
     <div
       ref="container"
       py-1
@@ -131,7 +136,6 @@ const abort = () => {
       max-w-full
       h="max"
       relative
-      class="markdown"
       :class="[
         message.message.role === 'user'
           ? 'bg-dark-50 color-light-50'

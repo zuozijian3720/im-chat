@@ -3,8 +3,8 @@ import dti from "dom-to-image";
 import { computed, ref } from "vue";
 import axios from "axios";
 import { injectTreeChat, MessageNode } from "../logic/TreeChat";
-import ShareMessageView from "./ShareMessageView.vue";
 import { useMessage } from "naive-ui";
+import SharePreview from "./SharePreview.vue";
 
 const props = defineProps<{
   message: MessageNode;
@@ -82,52 +82,40 @@ const scaleStyle = computed(() => {
 
 <template>
   <div flex flex-col>
+    <div
+      style="
+        position: absolute;
+        left: -999999999px;
+        user-select: none;
+        pointer-events: none;
+      "
+    >
+      <div ref="contentRef">
+        <SharePreview
+          :message-list="messageList"
+          :style="previewStyle + scaleStyle.enlarge"
+        />
+      </div>
+    </div>
     <div flex justify-center>
       <n-slider
         w="600px"
         v-model:value="previewWidth"
-        :step="10"
+        :step="5"
         :max="1200"
-        :min="300"
+        :min="200"
       ></n-slider>
     </div>
-    <div
-      overflow-y-scroll
-      max-h="500px"
-      flex
-      justify-center
-      w-full
-      mt-4
-      mb-4
-      min-w="600px"
-    >
-      <div :style="scaleStyle.reduce">
-        <div
-          ref="contentRef"
-          style="pointer-events: none"
-          bg="white"
-          rd="2"
-          mb="2"
-          p="2"
-          :style="previewStyle + scaleStyle.enlarge"
-        >
-          <share-message-view
-            v-for="(msg, i) in messageList"
-            :key="msg.id"
-            :class="[i != 0 && 'mt-3']"
-            :message="msg"
-          ></share-message-view>
-          <div flex justify-center mt-1 select-none>IM-Chat</div>
-        </div>
-      </div>
+    <div overflow-y-scroll max-h="500px" flex justify-center w-full mt-4 mb-4>
+      <SharePreview :message-list="messageList" :style="previewStyle" />
     </div>
     <n-space justify="center">
       <n-button :loading="copyImageLoading" @click="copyImage()"
         >分享图片
       </n-button>
       <n-button :loading="copyLinkLoading" @click="copyLink()"
-        >分享链接</n-button
-      >
+        >分享链接
+      </n-button>
     </n-space>
   </div>
 </template>

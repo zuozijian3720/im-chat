@@ -5,11 +5,6 @@ import { computed } from "vue";
 const props = defineProps<{
   message: MessageNode;
 }>();
-const messageBorderStyle = computed(() => {
-  return props.message.message.role === "user"
-    ? "backgroundColor:rgb(74, 74, 74);color:rgb(253, 253, 253);"
-    : "border:1px dashed rgb(243, 244, 246);";
-});
 const title = computed(() => {
   const gptInfo = props.message.gptInfo;
   if (!gptInfo) {
@@ -32,37 +27,42 @@ const title = computed(() => {
 });
 </script>
 <template>
-  <div style="display: flex; width: 100%; position: relative">
+  <div
+    class="flex"
+    w-full
+    relative
+    :class="[message.message.role === 'assistant' && 'pt-1']"
+  >
     <div
-      style="
-        padding: 4px 8px;
-        border-radius: 4px;
-        max-width: 100%;
-        height: max-content;
-        position: relative;
-      "
-      :style="messageBorderStyle"
+      py-1
+      px-2
+      rd-1
+      max-w-full
+      h="max"
+      relative
+      :class="[
+        message.message.role === 'user'
+          ? 'bg-dark-50 color-light-50'
+          : 'b-dashed b-1 b-gray-100',
+      ]"
     >
       <span
         v-if="message.gptInfo"
-        style="
-          top: -7px;
-          user-select: none;
-          position: relative;
-          height: 4px;
-          font-size: 10px;
-          color: rgb(156, 163, 175);
-          display: flex;
-          align-items: center;
-          background-color: white;
-          width: max-content;
-        "
+        select-none
+        relative
+        h-1
+        style="top: -7px"
+        text-2.5
+        text-gray-400
+        flex
+        items-center
+        bg-white
+        w-max
         >{{ title }}</span
       >
-      <div style="font-size: 12px">
-        <span style="white-space: pre-wrap"
-          >{{ message.message.content
-          }}<span style="display: inline-block; height: 1em"></span
+      <div text-12px>
+        <span whitespace="pre-wrap"
+          >{{ message.message.content }}<span inline-block h="1em"></span
         ></span>
       </div>
     </div>
