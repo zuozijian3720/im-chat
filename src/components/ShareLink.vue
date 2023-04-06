@@ -114,9 +114,10 @@ const scaleStyle = computed(() => {
           <share-message-view
             v-for="(msg, i) in messageList"
             :key="msg.id"
-            :class="[i != 0 && 'mt-2']"
+            :class="[i != 0 && 'mt-3']"
             :message="msg"
           ></share-message-view>
+          <div flex justify-center mt-1 select-none>IM-Chat</div>
         </div>
       </div>
     </div>

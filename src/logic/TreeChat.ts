@@ -59,7 +59,7 @@ const useTreeChat = () => {
       id,
       isNew: true,
       children: [],
-      workModel: true,
+      workModel: false,
       message: {
         role,
         content: message,
