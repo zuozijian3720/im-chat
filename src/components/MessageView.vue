@@ -3,7 +3,6 @@ import { computed, h, onMounted, ref } from "vue";
 import { useElementHover } from "@vueuse/core";
 import { injectTreeChat, MessageNode } from "../logic/TreeChat";
 import { NSpin, useDialog } from "naive-ui";
-import axios from "axios";
 import ShareLink from "./ShareLink.vue";
 
 const props = defineProps<{
@@ -14,7 +13,8 @@ const container = ref<HTMLDivElement>();
 const hover = useElementHover(container);
 const chat = injectTreeChat();
 const dialog = useDialog();
-
+const showShare = ref(false);
+const shareIcon = () => h("div", { class: "i-ph-share-network-light" });
 const ops = computed<
   {
     icon: string;
@@ -30,27 +30,14 @@ const ops = computed<
       tips: "分享",
       size: "text-18px",
       onClick: async () => {
-        const urlRef = ref<string>("");
-        const getShareId = async (): Promise<string> => {
-          const result = await axios.post(
-            "https://jpzrg8mqpi.hk.aircode.run/share",
-            {
-              data: chat.getBeforeChat(props.message.id),
-            }
-          );
-          return result.data.id;
-        };
-        dialog.create({
-          title: "分享",
-          icon: () => h("div", { class: "i-ph-share-network-light" }),
-          content: () => h(ShareLink, { url: urlRef.value }),
-        });
-        const shareId = props.message.shareId ?? (await getShareId());
-        const url = new URL(location.origin);
-        url.pathname = "/share";
-        url.searchParams.set("id", shareId);
-        urlRef.value = url.href;
-        props.message.shareId = shareId;
+        showShare.value = true;
+        // dialog.create({
+        //   style: "width:max-content",
+        //   class: "bg-gray-100",
+        //   title: "分享",
+        //   icon: () => h("div", { class: "i-ph-share-network-light" }),
+        //   content: () => h(ShareLink, { message: props.message })
+        // });
       },
     },
     {
@@ -129,6 +116,10 @@ onMounted(() => {
     container.value?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 });
+const abort = () => {
+  props.message.abort?.abort?.();
+  props.message.abort = undefined;
+};
 </script>
 <template>
   <div class="flex" w-full relative>
@@ -199,13 +190,7 @@ onMounted(() => {
         </div>
       </div>
       <div text-12px>
-        <n-button
-          v-if="message.abort"
-          size="tiny"
-          mr-2
-          dashed
-          @click="message.abort?.abort()"
-        >
+        <n-button v-if="message.abort" size="tiny" mr-2 dashed @click="abort()">
           <template #icon>
             <n-spin size="small"></n-spin>
           </template>
@@ -219,6 +204,16 @@ onMounted(() => {
         ></span>
       </div>
     </div>
+    <n-modal v-model:show="showShare">
+      <n-dialog
+        title="分享"
+        :icon="shareIcon"
+        class="bg-gray-100"
+        style="width: max-content"
+      >
+        <share-link :message="props.message" />
+      </n-dialog>
+    </n-modal>
   </div>
 </template>
 <style lang="scss"></style>

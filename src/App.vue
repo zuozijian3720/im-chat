@@ -3,8 +3,10 @@ import {
   GlobalThemeOverrides,
   NConfigProvider,
   NDialogProvider,
+  NMessageProvider,
 } from "naive-ui";
 import { provideTreeChat } from "./logic/TreeChat";
+
 const chat = provideTreeChat();
 const themeOverrides: GlobalThemeOverrides = {
   common: {
@@ -46,9 +48,13 @@ const themeOverrides: GlobalThemeOverrides = {
 </script>
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
-    <n-dialog-provider>
-      <router-view></router-view>
-    </n-dialog-provider>
+    <n-message-provider>
+      <n-dialog-provider>
+        <n-notification-provider>
+          <router-view></router-view>
+        </n-notification-provider>
+      </n-dialog-provider>
+    </n-message-provider>
   </n-config-provider>
 </template>
 <style>

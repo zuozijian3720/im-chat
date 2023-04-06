@@ -5,6 +5,7 @@ import {
   NAvatar,
   NButton,
   NCard,
+  NDialog,
   NDivider,
   NEllipsis,
   NFormItem,
@@ -48,6 +49,7 @@ const naive = create({
     NInputNumber,
     NSpace,
     NSwitch,
+    NDialog,
   ],
 });
 

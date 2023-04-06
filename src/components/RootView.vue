@@ -17,7 +17,7 @@
         @click="clickChat(chat[chat.length - 1].id)"
       >
         <message-view
-          v-for="(msg, i) in chat"
+          v-for="(msg, i) in chat.slice(0, 4)"
           :key="msg.id"
           :class="[i != 0 && 'mt-2']"
           :message="msg"
@@ -35,9 +35,7 @@ import MessageView from "./MessageView.vue";
 
 const chat = injectTreeChat();
 const rootList = computed(() => {
-  return chat.getAfterChatList().map((v) => {
-    return v.slice(0, 4);
-  });
+  return chat.getAfterChatList();
 });
 const clickChat = (id: string) => {
   console.log(id);
