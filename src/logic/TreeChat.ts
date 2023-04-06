@@ -162,6 +162,9 @@ const useTreeChat = () => {
   };
   const deleteMessage = (id: string) => {
     const node = treeChat.value[id];
+    if (current.value === id) {
+      current.value = node.parent;
+    }
     if (node.parent) {
       const parent = treeChat.value[node.parent];
       parent.children = parent.children.filter((v) => v !== id);
