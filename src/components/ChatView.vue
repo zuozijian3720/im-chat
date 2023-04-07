@@ -26,11 +26,12 @@
               p="2"
             >
               <message-view
-                v-for="(msg, i) in chat"
+                v-for="(msg, i) in chat.messages"
                 :key="msg.id"
                 :class="[i != 0 && 'mt-2']"
                 :message="msg"
               ></message-view>
+              <ForkedMessage :chat="chat" />
             </div>
           </div>
         </div>
@@ -117,6 +118,7 @@ import MessageView from "./MessageView.vue";
 import { useScroll } from "@vueuse/core";
 import { models } from "../utils/chatApi";
 import isHotkey from "is-hotkey";
+import ForkedMessage from "./ForkedMessage.vue";
 
 const chat = injectTreeChat();
 const text = ref<string>("");
@@ -177,7 +179,7 @@ const sendMessage = () => {
     if (!lastChat) {
       lastMessage = current;
     } else {
-      lastMessage = lastChat[lastChat.length - 1];
+      lastMessage = lastChat.messages[lastChat.messages.length - 1];
     }
     const msg = chat.newMessage("user", text.value, { parent: lastMessage.id });
     chat.getAnswer(msg.id, chat.getSetting(current.id));

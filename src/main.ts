@@ -15,7 +15,9 @@ import {
   NList,
   NListItem,
   NModal,
+  NPagination,
   NPopconfirm,
+  NPopover,
   NSelect,
   NSlider,
   NSpace,
@@ -50,6 +52,8 @@ const naive = create({
     NSpace,
     NSwitch,
     NDialog,
+    NPagination,
+    NPopover,
   ],
 });
 

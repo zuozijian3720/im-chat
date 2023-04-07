@@ -25,7 +25,11 @@ export type MessageNode = {
   };
 };
 export type TreeChat = Record<string, MessageNode>;
-export type Chat = MessageNode[];
+export type Chat = {
+  messages: MessageNode[];
+  lastFork?: MessageNode;
+  forkCount: number;
+};
 export type ChatList = Chat[];
 
 export const provideTreeChat = () => {
@@ -131,16 +135,24 @@ const useTreeChat = () => {
   const getAfterChatList = (id?: string): ChatList => {
     const ids = id == null ? roots.value : treeChat.value[id].children;
     const getList = (id: string): Chat => {
-      const list: Chat = [];
+      const chat: Chat = {
+        messages: [],
+        forkCount: 0,
+      };
       let node: MessageNode | undefined = treeChat.value[id];
       while (node) {
-        list.push(node);
+        chat.messages.push(node);
+        if (node.children.length > 1) {
+          const lastId = node.children[node.children.length - 1];
+          chat.lastFork = treeChat.value[lastId];
+          chat.forkCount = node.children.length;
+        }
         node =
           node.children.length === 1
             ? treeChat.value[node.children[0]]
             : undefined;
       }
-      return list;
+      return chat;
     };
     return ids.map(getList);
   };

@@ -20,9 +20,6 @@ const title = computed(() => {
   if (gptInfo.totalTime != null) {
     infoList.push(`${(gptInfo.totalTime / 1000).toFixed(2)}s`);
   }
-  if (props.message.children.length) {
-    infoList.push(`⑁${props.message.children.length}`);
-  }
   return infoList.join(" ");
 });
 </script>

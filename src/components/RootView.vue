@@ -14,15 +14,16 @@
         rd-2
         cursor="pointer"
         :class="[i != 0 && 'mt-2']"
-        @click="clickChat(chat[chat.length - 1].id)"
+        @click="clickChat(chat.messages[chat.messages.length - 1].id)"
       >
         <message-view
-          v-for="(msg, i) in chat.slice(0, 4)"
+          v-for="(msg, i) in chat.messages.slice(0, 4)"
           :key="msg.id"
           :class="[i != 0 && 'mt-2']"
           :message="msg"
           short
         ></message-view>
+        <ForkedMessage :chat="chat" />
       </div>
     </div>
   </div>
@@ -32,6 +33,7 @@
 import { injectTreeChat } from "../logic/TreeChat";
 import { computed } from "vue";
 import MessageView from "./MessageView.vue";
+import ForkedMessage from "./ForkedMessage.vue";
 
 const chat = injectTreeChat();
 const rootList = computed(() => {

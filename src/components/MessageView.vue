@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, h, onMounted, ref } from "vue";
+import { computed, h, onMounted, ref, watch } from "vue";
 import { useElementHover } from "@vueuse/core";
 import { injectTreeChat, MessageNode } from "../logic/TreeChat";
 import { NSpin, useDialog } from "naive-ui";
@@ -13,7 +13,6 @@ const container = ref<HTMLDivElement>();
 const hover = useElementHover(container);
 const chat = injectTreeChat();
 const dialog = useDialog();
-const showShare = ref(false);
 const shareIcon = () => h("div", { class: "i-ph-share-network-light" });
 const ops = computed<
   {
@@ -30,14 +29,13 @@ const ops = computed<
       tips: "分享",
       size: "text-18px",
       onClick: async () => {
-        showShare.value = true;
-        // dialog.create({
-        //   style: "width:max-content",
-        //   class: "bg-gray-100",
-        //   title: "分享",
-        //   icon: () => h("div", { class: "i-ph-share-network-light" }),
-        //   content: () => h(ShareLink, { message: props.message })
-        // });
+        dialog.create({
+          style: "width:max-content",
+          class: "bg-gray-100",
+          title: "分享",
+          icon: () => h("div", { class: "i-ph-share-network-light" }),
+          content: () => h(ShareLink, { message: props.message }),
+        });
       },
     },
     {
@@ -104,7 +102,7 @@ const title = computed(() => {
   if (gptInfo.totalTime != null) {
     infoList.push(`${(gptInfo.totalTime / 1000).toFixed(2)}s`);
   }
-  if (props.message.children.length) {
+  if (props.message.children.length > 1) {
     infoList.push(`⑁${props.message.children.length}`);
   }
   return infoList.join(" ");
@@ -120,6 +118,15 @@ const abort = () => {
   props.message.abort?.abort?.();
   props.message.abort = undefined;
 };
+const toolsRef = ref<HTMLDivElement>();
+watch(hover, (hover) => {
+  const ele = toolsRef.value;
+  if (ele && hover) {
+    if (ele.offsetLeft < 0) {
+      ele.style.right = `-${ele.offsetWidth - 18}px`;
+    }
+  }
+});
 </script>
 <template>
   <div
@@ -157,6 +164,7 @@ const abort = () => {
         >{{ title }}</span
       >
       <div
+        ref="toolsRef"
         :class="[!hover && 'invisible']"
         absolute
         style="right: 0; top: -24px"
@@ -208,16 +216,6 @@ const abort = () => {
         ></span>
       </div>
     </div>
-    <n-modal v-model:show="showShare">
-      <n-dialog
-        title="分享"
-        :icon="shareIcon"
-        class="bg-gray-100"
-        style="width: max-content"
-      >
-        <share-link :message="props.message" />
-      </n-dialog>
-    </n-modal>
   </div>
 </template>
 <style lang="scss"></style>
