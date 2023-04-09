@@ -29,9 +29,9 @@ const props = defineProps<{
     >
       <info-box :message="message" hide-fork-count></info-box>
       <div text-12px>
-        <div v-if="short" whitespace="nowrap" text-ellipsis overflow-hidden>
+        <n-ellipsis v-if="short" :tooltip="false">
           {{ message.message.content }}
-        </div>
+        </n-ellipsis>
         <span v-else whitespace="pre-wrap"
           >{{ message.message.content }}<span inline-block h="1em"></span
         ></span>

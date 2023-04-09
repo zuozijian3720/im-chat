@@ -31,13 +31,14 @@
   </div>
 </template>
 <script lang="ts" setup>
+export type ToolsBarOption = {
+  icon: string;
+  size: string;
+  tips: string;
+  onClick: () => void;
+};
 defineProps<{
-  options: {
-    icon: string;
-    size: string;
-    tips: string;
-    onClick: () => void;
-  }[];
+  options: ToolsBarOption[];
 }>();
 </script>
 <style lang="scss"></style>

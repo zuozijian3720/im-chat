@@ -1,5 +1,5 @@
 <template>
-  <div h-full flex flex-col bg-gray-200>
+  <div h-full flex flex-col bg-gray-100>
     <div shrink-0 p-2 flex items-center justify-between>
       <n-button round size="tiny" @click="chat.current.value = undefined">
         <template #icon>

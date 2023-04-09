@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { computed, h, onMounted, ref, watch } from "vue";
+import { h, onMounted, ref, watch } from "vue";
 import { useElementHover } from "@vueuse/core";
 import { injectTreeChat, MessageNode } from "../../logic/TreeChat";
 import { useDialog } from "naive-ui";
 import ShareLink from "../share/ShareLink.vue";
 import InfoBox from "./InfoBox.vue";
-import ToolsBar from "../ToolsBar.vue";
+import ToolsBar, { ToolsBarOption } from "../ToolsBar.vue";
 
 const props = defineProps<{
   message: MessageNode;
@@ -15,79 +15,69 @@ const container = ref<HTMLDivElement>();
 const hover = useElementHover(container);
 const chat = injectTreeChat();
 const dialog = useDialog();
-const ops = computed<
+const ops = [
   {
-    icon: string;
-    tips: string;
-    size: string;
-    color?: string;
-    onClick: () => void;
-  }[]
->(() => {
-  return [
-    {
-      icon: "i-ph-share-network-light",
-      tips: "分享",
-      size: "text-18px",
-      onClick: async () => {
-        dialog.create({
-          style: "width:max-content",
-          class: "bg-gray-100",
-          title: "分享",
-          icon: () => h("div", { class: "i-ph-share-network-light" }),
-          content: () => h(ShareLink, { message: props.message }),
+    icon: "i-ph-share-network-light",
+    tips: "分享",
+    size: "text-18px",
+    onClick: async () => {
+      dialog.create({
+        style: "width:max-content",
+        class: "bg-gray-100",
+        title: "分享",
+        icon: () => h("div", { class: "i-ph-share-network-light" }),
+        content: () => h(ShareLink, { message: props.message }),
+      });
+    },
+  },
+  {
+    icon: "i-ic-round-star-outline",
+    tips: "收藏成 prompt",
+    size: "text-20px",
+    onClick: () => {
+      dialog.info({
+        title: "未实现",
+      });
+      console.log(props.message.gptInfo);
+    },
+  },
+  {
+    icon: "i-gg-git-fork",
+    tips: "从这里分叉",
+    size: "text-16px",
+    onClick: () => {
+      chat.current.value = props.message.id;
+    },
+  },
+  {
+    icon: "i-teenyicons-bulb-on-outline",
+    tips: "生成回答",
+    size: "text-14px",
+    onClick: () => {
+      chat.getAnswer(props.message.id);
+    },
+  },
+  {
+    icon: "i-ic-round-delete-outline",
+    tips: "删除消息",
+    size: "text-18px",
+    onClick: () => {
+      if (props.message.children.length > 0) {
+        dialog.warning({
+          title: "删除消息",
+          content: "删除消息会删除所有子消息，是否继续？",
+          positiveText: "继续",
+          negativeText: "取消",
+          onPositiveClick() {
+            chat.deleteMessage(props.message.id);
+          },
         });
-      },
+      } else {
+        chat.deleteMessage(props.message.id);
+      }
     },
-    {
-      icon: "i-ic-round-star-outline",
-      tips: "收藏成 prompt",
-      size: "text-20px",
-      onClick: () => {
-        dialog.info({
-          title: "未实现",
-        });
-        console.log(props.message.gptInfo);
-      },
-    },
-    {
-      icon: "i-gg-git-fork",
-      tips: "从这里分叉",
-      size: "text-16px",
-      onClick: () => {
-        chat.current.value = props.message.id;
-      },
-    },
-    {
-      icon: "i-teenyicons-bulb-on-outline",
-      tips: "生成回答",
-      size: "text-14px",
-      onClick: () => {
-        chat.getAnswer(props.message.id);
-      },
-    },
-    {
-      icon: "i-ic-round-delete-outline",
-      tips: "删除消息",
-      size: "text-18px",
-      onClick: () => {
-        if (props.message.children.length > 0) {
-          dialog.warning({
-            title: "删除消息",
-            content: "删除消息会删除所有子消息，是否继续？",
-            positiveText: "继续",
-            negativeText: "取消",
-            onPositiveClick() {
-              chat.deleteMessage(props.message.id);
-            },
-          });
-        } else {
-          chat.deleteMessage(props.message.id);
-        }
-      },
-    },
-  ];
-});
+  },
+];
 onMounted(() => {
   if (props.message.isNew) {
     // eslint-disable-next-line vue/no-mutating-props

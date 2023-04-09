@@ -4,6 +4,7 @@ import {
   NConfigProvider,
   NDialogProvider,
   NMessageProvider,
+  NNotificationProvider,
 } from "naive-ui";
 import { provideTreeChat } from "./logic/TreeChat";
 

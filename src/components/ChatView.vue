@@ -94,7 +94,7 @@ const modelOps = models.map((v) => ({
 }));
 </script>
 <template>
-  <div bg="gray-200" flex flex-col overflow-hidden>
+  <div bg-gray-100 flex flex-col overflow-hidden>
     <div flex-1 flex flex-col overflow-hidden>
       <div v-if="!isRoot" flex flex-col overflow-hidden flex-1>
         <div
@@ -148,6 +148,7 @@ const modelOps = models.map((v) => ({
           text-120px
           font-bold
           text-gray
+          select-none
           flex
           justify-center
           whitespace="nowrap"
@@ -162,14 +163,15 @@ const modelOps = models.map((v) => ({
           IM Chat
         </div>
         <div w-90>
-          <n-form-item label="APIKey">
-            <n-input
-              size="small"
-              v-model:value="chat.config.value.apiKey"
-              type="password"
-              placeholder="输入 APIKey"
-            ></n-input>
-          </n-form-item>
+          <n-input
+            size="small"
+            v-model:value="chat.config.value.apiKey"
+            type="password"
+            placeholder="输入 APIKey"
+            style="background-color: transparent"
+          >
+            <template #prefix>API Key</template>
+          </n-input>
         </div>
       </div>
     </div>
