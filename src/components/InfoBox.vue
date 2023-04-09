@@ -24,27 +24,32 @@ const showInfo = () => {
     w-max
     @click="showInfo"
     h-1
-    pl="2px"
+    px="4px"
   >
-    <span h-1 w-max flex items-center style="opacity: 0.3">
+    <span class="box" h-1 w-max flex items-center style="opacity: 0.3">
       <span
         v-if="gptInfo?.model"
         :style="colorful && `color:${modelsColor[gptInfo.model]}`"
-        mr-2
         >{{ gptInfo?.model.toUpperCase() }}</span
       >
       <span
         v-if="gptInfo?.temperature != null"
         :style="colorful && `color:${temperatureColors[gptInfo.temperature]}`"
-        mr-2
         >{{ gptInfo?.temperature.toString() }}℃</span
       >
-      <span v-if="gptInfo?.totalTime" mr-2
+      <span v-if="gptInfo?.totalTime"
         >{{ (gptInfo?.totalTime / 1000).toFixed(2) }}s</span
       >
-      <span v-if="!hideForkCount && message.children.length > 1" mr-2
+      <span v-if="!hideForkCount && message.children.length > 1"
         ><span text-12px>⑁</span>{{ message.children.length }}</span
       >
     </span>
   </div>
 </template>
+<style lang="scss" scoped>
+.box {
+  span:not(:last-child) {
+    margin-right: 8px;
+  }
+}
+</style>

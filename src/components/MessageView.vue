@@ -14,7 +14,6 @@ const container = ref<HTMLDivElement>();
 const hover = useElementHover(container);
 const chat = injectTreeChat();
 const dialog = useDialog();
-const shareIcon = () => h("div", { class: "i-ph-share-network-light" });
 const ops = computed<
   {
     icon: string;
@@ -87,26 +86,6 @@ const ops = computed<
       },
     },
   ];
-});
-const title = computed(() => {
-  const gptInfo = props.message.gptInfo;
-  if (!gptInfo) {
-    return;
-  }
-  const infoList: string[] = [];
-  if (gptInfo.model != null) {
-    infoList.push(gptInfo.model?.toUpperCase());
-  }
-  if (gptInfo.temperature != null) {
-    infoList.push(`${gptInfo.temperature}℃`);
-  }
-  if (gptInfo.totalTime != null) {
-    infoList.push(`${(gptInfo.totalTime / 1000).toFixed(2)}s`);
-  }
-  if (props.message.children.length > 1) {
-    infoList.push(`⑁${props.message.children.length}`);
-  }
-  return infoList.join(" ");
 });
 onMounted(() => {
   if (props.message.isNew) {

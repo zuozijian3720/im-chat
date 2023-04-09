@@ -104,10 +104,22 @@ const modelOps = models.map((v) => ({
           z-index="10"
           :class="[!scroll.arrivedState.top && 'title-bar-shadow']"
           transition
+          flex
+          justify-center
         >
-          <n-switch v-model:value="currentMessage!.workMode">
-            <template #checked> work 模式</template>
-            <template #unchecked> chat 模式</template>
+          <n-switch size="medium" v-model:value="currentMessage!.workMode">
+            <template #checked>
+              <n-tooltip>
+                <template #trigger> Work </template>
+                工作模式，每一次提问都会从 Prompt 创建分叉
+              </n-tooltip>
+            </template>
+            <template #unchecked>
+              <n-tooltip>
+                <template #trigger> Chat </template>
+                对话模式，在一个话题下进行多轮对话
+              </n-tooltip>
+            </template>
           </n-switch>
         </div>
         <div ref="scrollContainer" flex-1 overflow-y-scroll overflow-x-hidden>
