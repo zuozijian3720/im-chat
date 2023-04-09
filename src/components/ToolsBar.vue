@@ -1,19 +1,12 @@
 <template>
-  <div
-    flex
-    border="1px solid gray-100"
-    overflow="hidden"
-    rd="4px"
-    bg="white"
-    shadow-md
-  >
+  <div flex overflow="hidden" rd="4px" bg="white" shadow>
     <template v-for="(v, i) in options" :key="i">
       <div v-if="i !== 0" w="1px" bg="gray-100" />
       <n-tooltip>
         <template #trigger>
           <div
-            w="20px"
-            h="20px"
+            w="24px"
+            h="24px"
             flex
             items-center
             justify-center

@@ -31,9 +31,9 @@ const ops = [
     },
   },
   {
-    icon: "i-ic-round-star-outline",
+    icon: "i-ph-star-light",
     tips: "收藏成 prompt",
-    size: "text-20px",
+    size: "text-18px",
     onClick: () => {
       dialog.info({
         title: "未实现",
@@ -42,9 +42,9 @@ const ops = [
     },
   },
   {
-    icon: "i-gg-git-fork",
+    icon: "i-ph-git-fork",
     tips: "从这里分叉",
-    size: "text-16px",
+    size: "text-18px",
     onClick: () => {
       chat.current.value = props.message.id;
     },
@@ -52,13 +52,13 @@ const ops = [
   {
     icon: "i-teenyicons-bulb-on-outline",
     tips: "生成回答",
-    size: "text-14px",
+    size: "text-16px",
     onClick: () => {
       chat.getAnswer(props.message.id);
     },
   },
   {
-    icon: "i-ic-round-delete-outline",
+    icon: "i-ph-trash",
     tips: "删除消息",
     size: "text-18px",
     onClick: () => {
