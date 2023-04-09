@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, h, ref } from "vue";
 import { injectTreeChat, MessageNode } from "../logic/TreeChat";
-import MessageView from "./MessageView.vue";
+import MessageView from "./message/MessageView.vue";
 import { useScroll } from "@vueuse/core";
 import {
   models,
@@ -10,7 +10,7 @@ import {
   temperatureMarks,
 } from "../utils/chatApi";
 import isHotkey from "is-hotkey";
-import ForkedMessage from "./ForkedMessage.vue";
+import ForkedMessage from "./message/ForkedMessage.vue";
 
 const chat = injectTreeChat();
 const text = ref<string>("");

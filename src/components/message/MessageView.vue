@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, h, onMounted, ref, watch } from "vue";
 import { useElementHover } from "@vueuse/core";
-import { injectTreeChat, MessageNode } from "../logic/TreeChat";
+import { injectTreeChat, MessageNode } from "../../logic/TreeChat";
 import { useDialog } from "naive-ui";
-import ShareLink from "./ShareLink.vue";
+import ShareLink from "../share/ShareLink.vue";
 import InfoBox from "./InfoBox.vue";
-import ToolsBar from "./ToolsBar.vue";
+import ToolsBar from "../ToolsBar.vue";
 
 const props = defineProps<{
   message: MessageNode;

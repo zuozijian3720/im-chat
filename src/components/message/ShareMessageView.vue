@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MessageNode } from "../logic/TreeChat";
+import { MessageNode } from "../../logic/TreeChat";
 import InfoBox from "./InfoBox.vue";
 
 const props = defineProps<{

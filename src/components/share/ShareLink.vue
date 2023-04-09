@@ -2,7 +2,7 @@
 import dti from "dom-to-image";
 import { computed, ref } from "vue";
 import axios from "axios";
-import { injectTreeChat, MessageNode } from "../logic/TreeChat";
+import { injectTreeChat, MessageNode } from "../../logic/TreeChat";
 import { useMessage } from "naive-ui";
 import SharePreview from "./SharePreview.vue";
 

@@ -12,8 +12,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { MessageNode } from "../logic/TreeChat";
-import ShareMessageView from "./ShareMessageView.vue";
+import { MessageNode } from "../../logic/TreeChat";
+import ShareMessageView from "../message/ShareMessageView.vue";
 
 defineProps<{
   messageList: MessageNode[];

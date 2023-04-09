@@ -31,11 +31,12 @@
 
 <script setup lang="ts">
 import { injectTreeChat } from "../logic/TreeChat";
-import ForkedMessage from "./ForkedMessage.vue";
-import ShareMessageView from "./ShareMessageView.vue";
+import ForkedMessage from "./message/ForkedMessage.vue";
+import ShareMessageView from "./message/ShareMessageView.vue";
+import { useElementHover } from "@vueuse/core";
 
 const treeChat = injectTreeChat();
-
+useElementHover();
 const clickChat = (id: string) => {
   treeChat.current.value = id;
 };

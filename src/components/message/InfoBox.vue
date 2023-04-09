@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { MessageNode } from "../logic/TreeChat";
+import { MessageNode } from "../../logic/TreeChat";
 import { computed, toRaw } from "vue";
-import { modelsColor, temperatureColors } from "../utils/chatApi";
+import { modelsColor, temperatureColors } from "../../utils/chatApi";
 
 const props = defineProps<{
   message: MessageNode;

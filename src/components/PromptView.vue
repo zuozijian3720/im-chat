@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import { injectTreeChat } from "../logic/TreeChat";
 import { computed } from "vue";
-import MessageView from "./MessageView.vue";
+import MessageView from "./message/MessageView.vue";
 
 const chat = injectTreeChat();
 const beforeList = computed(() => {
