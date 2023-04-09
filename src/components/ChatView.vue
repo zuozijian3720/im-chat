@@ -11,6 +11,7 @@ import {
 } from "../utils/chatApi";
 import isHotkey from "is-hotkey";
 import ForkedMessage from "./message/ForkedMessage.vue";
+import MainPanel from "./MainPanel.vue";
 
 const chat = injectTreeChat();
 const text = ref<string>("");
@@ -143,37 +144,7 @@ const modelOps = models.map((v) => ({
           </div>
         </div>
       </div>
-      <div flex-1 flex flex-col items-center justify-center v-else>
-        <div
-          text-120px
-          font-bold
-          text-gray
-          select-none
-          flex
-          justify-center
-          whitespace="nowrap"
-          style="
-            color: transparent;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-            background-color: #afafaf;
-            -webkit-background-clip: text;
-            background-clip: text;
-          "
-        >
-          IM Chat
-        </div>
-        <div w-90>
-          <n-input
-            size="small"
-            v-model:value="chat.config.value.apiKey"
-            type="password"
-            placeholder="输入 APIKey"
-            style="background-color: transparent"
-          >
-            <template #prefix>API Key</template>
-          </n-input>
-        </div>
-      </div>
+      <MainPanel v-else />
     </div>
     <div
       shrink-0

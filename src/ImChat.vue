@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import RootView from "./components/rootPanel/RootPanel.vue";
+import RootView from "./components/historyPanel/HistoryPanel.vue";
 import BeforeView from "./components/PromptView.vue";
 import AfterView from "./components/ChatView.vue";
 import { injectTreeChat } from "./logic/TreeChat";
