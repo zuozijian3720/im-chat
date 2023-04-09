@@ -145,8 +145,7 @@ watch(hover, (hover) => {
           {{ message.message.content }}
         </div>
         <span v-else whitespace="pre-wrap"
-          >{{ message.message.content }}{{ message.message.content
-          }}{{ message.message.content }}<span inline-block h="1em"></span
+          >{{ message.message.content }}<span inline-block h="1em"></span
         ></span>
         <span class="ping" v-if="message.abort" text-gray-300></span>
       </div>
