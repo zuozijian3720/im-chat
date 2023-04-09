@@ -7,6 +7,7 @@ import {
   NCard,
   NDialog,
   NDivider,
+  NDropdown,
   NEllipsis,
   NFormItem,
   NIcon,
@@ -54,6 +55,7 @@ const naive = create({
     NDialog,
     NPagination,
     NPopover,
+    NDropdown,
   ],
 });
 

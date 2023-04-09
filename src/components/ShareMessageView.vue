@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { MessageNode } from "../logic/TreeChat";
 import { computed } from "vue";
+import InfoBox from "./InfoBox.vue";
 
 const props = defineProps<{
   message: MessageNode;
@@ -40,23 +41,10 @@ const title = computed(() => {
       :class="[
         message.message.role === 'user'
           ? 'bg-dark-50 color-light-50'
-          : 'b-dashed b-1 b-gray-100',
+          : 'b-dashed b-1 b-gray-200',
       ]"
     >
-      <span
-        v-if="message.gptInfo"
-        select-none
-        relative
-        h-1
-        style="top: -7px"
-        text-2.5
-        text-gray-400
-        flex
-        items-center
-        bg-white
-        w-max
-        >{{ title }}</span
-      >
+      <info-box :message="message" hide-fork-count></info-box>
       <div text-12px>
         <span whitespace="pre-wrap"
           >{{ message.message.content }}<span inline-block h="1em"></span

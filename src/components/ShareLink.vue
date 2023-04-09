@@ -107,7 +107,9 @@ const scaleStyle = computed(() => {
       ></n-slider>
     </div>
     <div overflow-y-scroll max-h="500px" flex justify-center w-full mt-4 mb-4>
-      <SharePreview :message-list="messageList" :style="previewStyle" />
+      <div>
+        <SharePreview :message-list="messageList" :style="previewStyle" />
+      </div>
     </div>
     <n-space justify="center">
       <n-button :loading="copyImageLoading" @click="copyImage()"

@@ -2,7 +2,7 @@
   <div flex flex-col bg="gray-200" overflow-hidden h-full>
     <div overflow-y-scroll overflow-x-hidden flex-1 flex flex-col p-2>
       <div
-        v-for="(chat, i) in rootList"
+        v-for="(chat, i) in treeChat.rootList.value"
         :key="i"
         b-1
         b-white
@@ -31,17 +31,13 @@
 
 <script setup lang="ts">
 import { injectTreeChat } from "../logic/TreeChat";
-import { computed } from "vue";
 import MessageView from "./MessageView.vue";
 import ForkedMessage from "./ForkedMessage.vue";
 
-const chat = injectTreeChat();
-const rootList = computed(() => {
-  return chat.getAfterChatList();
-});
+const treeChat = injectTreeChat();
+
 const clickChat = (id: string) => {
-  console.log(id);
-  chat.current.value = id;
+  treeChat.current.value = id;
 };
 </script>
 

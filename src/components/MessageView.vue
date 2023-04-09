@@ -2,8 +2,9 @@
 import { computed, h, onMounted, ref, watch } from "vue";
 import { useElementHover } from "@vueuse/core";
 import { injectTreeChat, MessageNode } from "../logic/TreeChat";
-import { NSpin, useDialog } from "naive-ui";
+import { useDialog } from "naive-ui";
 import ShareLink from "./ShareLink.vue";
+import InfoBox from "./InfoBox.vue";
 
 const props = defineProps<{
   message: MessageNode;
@@ -94,7 +95,7 @@ const title = computed(() => {
   }
   const infoList: string[] = [];
   if (gptInfo.model != null) {
-    infoList.push(gptInfo.model);
+    infoList.push(gptInfo.model?.toUpperCase());
   }
   if (gptInfo.temperature != null) {
     infoList.push(`${gptInfo.temperature}℃`);
@@ -146,23 +147,10 @@ watch(hover, (hover) => {
       :class="[
         message.message.role === 'user'
           ? 'bg-dark-50 color-light-50'
-          : 'b-dashed b-1 b-gray-100',
+          : 'b-dashed b-1 b-gray-200',
       ]"
     >
-      <span
-        v-if="message.gptInfo"
-        select-none
-        relative
-        h-1
-        style="top: -7px"
-        text-2.5
-        text-gray-400
-        flex
-        items-center
-        bg-white
-        w-max
-        >{{ title }}</span
-      >
+      <info-box :message="message"></info-box>
       <div
         ref="toolsRef"
         :class="[!hover && 'invisible']"
@@ -188,7 +176,7 @@ watch(hover, (hover) => {
                   flex
                   items-center
                   justify-center
-                  hover="bg-gray200"
+                  hover="bg-gray-200"
                   transition
                   cursor="pointer"
                   @click.prevent.stop="v.onClick()"
@@ -202,11 +190,15 @@ watch(hover, (hover) => {
         </div>
       </div>
       <div text-12px>
-        <n-button v-if="message.abort" size="tiny" mr-2 dashed @click="abort()">
-          <template #icon>
-            <n-spin size="small"></n-spin>
-          </template>
-          闭嘴
+        <n-button
+          float-left
+          type="error"
+          size="tiny"
+          mr-2
+          v-if="message.abort"
+          @click="abort()"
+        >
+          {{ message.message.content ? "闭嘴" : "取消" }}
         </n-button>
         <div v-if="short" whitespace="nowrap" text-ellipsis overflow-hidden>
           {{ message.message.content }}
@@ -214,8 +206,36 @@ watch(hover, (hover) => {
         <span v-else whitespace="pre-wrap"
           >{{ message.message.content }}<span inline-block h="1em"></span
         ></span>
+        <span class="ping" v-if="message.abort" text-gray-300></span>
       </div>
     </div>
   </div>
 </template>
-<style lang="scss"></style>
+<style lang="scss">
+.ping::after {
+  content: "";
+  width: 3px;
+  height: 1.6em;
+  background: #b2b2b2;
+  display: inline-block;
+  vertical-align: bottom;
+  position: relative;
+  left: 3px;
+}
+
+.ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  0% {
+    opacity: 1;
+  }
+  8% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+</style>

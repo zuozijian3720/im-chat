@@ -1,4 +1,4 @@
-import { inject, provide, reactive, Ref, ref } from "vue";
+import { computed, inject, provide, reactive, Ref, ref } from "vue";
 import { nanoid } from "nanoid";
 import { GlobalConfig, useConfig } from "../utils/config";
 import { askGPT, GPTModel, Message, UserRole } from "../utils/chatApi";
@@ -18,7 +18,7 @@ export type MessageNode = {
   message: Message;
   abort?: AbortController;
   gptInfo?: GPTInfo;
-  workModel: boolean;
+  workMode: boolean;
   setting: {
     model: GPTModel;
     temperature: number;
@@ -63,7 +63,7 @@ const useTreeChat = () => {
       id,
       isNew: true,
       children: [],
-      workModel: false,
+      workMode: false,
       message: {
         role,
         content: message,
@@ -100,13 +100,20 @@ const useTreeChat = () => {
     messageNode.abort = new AbortController();
     const genInfo: GPTInfo = reactive(
       setting
-        ? setting
+        ? {
+            model: setting.model,
+            temperature: setting.temperature,
+          }
         : {
             model: config.value.model,
             temperature: config.value.temperature,
           }
     );
     messageNode.gptInfo = genInfo;
+    messageNode.setting = {
+      model: genInfo.model,
+      temperature: genInfo.temperature,
+    };
     const totalTime = Date.now();
     askGPT(
       getBeforeChat(id).map((v) => v.message),
@@ -206,6 +213,7 @@ const useTreeChat = () => {
     config,
     deleteMessage,
     getSetting,
+    rootList: computed(() => getAfterChatList()),
     isExist(id: string) {
       return !!treeChat.value[id];
     },
