@@ -44,6 +44,9 @@ const themeOverrides: GlobalThemeOverrides = {
     sizeMedium: "14px",
     sizeLarge: "18px",
   },
+  Input: {
+    border: "1px solid #525252",
+  },
 } as GlobalThemeOverrides;
 </script>
 <template>

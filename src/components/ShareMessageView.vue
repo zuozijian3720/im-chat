@@ -1,28 +1,11 @@
 <script setup lang="ts">
 import { MessageNode } from "../logic/TreeChat";
-import { computed } from "vue";
 import InfoBox from "./InfoBox.vue";
 
 const props = defineProps<{
   message: MessageNode;
+  short?: boolean;
 }>();
-const title = computed(() => {
-  const gptInfo = props.message.gptInfo;
-  if (!gptInfo) {
-    return;
-  }
-  const infoList: string[] = [];
-  if (gptInfo.model != null) {
-    infoList.push(gptInfo.model);
-  }
-  if (gptInfo.temperature != null) {
-    infoList.push(`${gptInfo.temperature}℃`);
-  }
-  if (gptInfo.totalTime != null) {
-    infoList.push(`${(gptInfo.totalTime / 1000).toFixed(2)}s`);
-  }
-  return infoList.join(" ");
-});
 </script>
 <template>
   <div
@@ -46,7 +29,10 @@ const title = computed(() => {
     >
       <info-box :message="message" hide-fork-count></info-box>
       <div text-12px>
-        <span whitespace="pre-wrap"
+        <div v-if="short" whitespace="nowrap" text-ellipsis overflow-hidden>
+          {{ message.message.content }}
+        </div>
+        <span v-else whitespace="pre-wrap"
           >{{ message.message.content }}<span inline-block h="1em"></span
         ></span>
       </div>

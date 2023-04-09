@@ -110,13 +110,13 @@ const modelOps = models.map((v) => ({
           <n-switch size="medium" v-model:value="currentMessage!.workMode">
             <template #checked>
               <n-tooltip>
-                <template #trigger> Work </template>
+                <template #trigger> Work</template>
                 工作模式，每一次提问都会从 Prompt 创建分叉
               </n-tooltip>
             </template>
             <template #unchecked>
               <n-tooltip>
-                <template #trigger> Chat </template>
+                <template #trigger> Chat</template>
                 对话模式，在一个话题下进行多轮对话
               </n-tooltip>
             </template>
@@ -246,6 +246,7 @@ const modelOps = models.map((v) => ({
         :placeholder="noAPIKey ? '请先设置 APIKey' : '你好！'"
         @blur="blur"
         @keydown="inputHotKey($event)"
+        style="background-color: transparent"
       >
         <template v-if="text" #suffix>
           <div flex flex-col items-end text-gray-400>

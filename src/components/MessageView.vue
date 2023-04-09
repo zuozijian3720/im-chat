@@ -5,6 +5,7 @@ import { injectTreeChat, MessageNode } from "../logic/TreeChat";
 import { useDialog } from "naive-ui";
 import ShareLink from "./ShareLink.vue";
 import InfoBox from "./InfoBox.vue";
+import ToolsBar from "./ToolsBar.vue";
 
 const props = defineProps<{
   message: MessageNode;
@@ -131,42 +132,13 @@ watch(hover, (hover) => {
     >
       <info-box :message="message"></info-box>
       <div
-        ref="toolsRef"
         :class="[!hover && 'invisible']"
+        ref="toolsRef"
         absolute
         style="right: 0; top: -24px"
         p-2
       >
-        <div
-          flex
-          border="1px solid gray-100"
-          overflow="hidden"
-          rd="4px"
-          bg="white"
-          shadow-md
-        >
-          <template v-for="(v, i) in ops" :key="i">
-            <div v-if="i !== 0" w="1px" bg="gray-100" />
-            <n-tooltip>
-              <template #trigger>
-                <div
-                  w="20px"
-                  h="20px"
-                  flex
-                  items-center
-                  justify-center
-                  hover="bg-gray-200"
-                  transition
-                  cursor="pointer"
-                  @click.prevent.stop="v.onClick()"
-                >
-                  <div :class="[v.icon, 'text-gray-400', v.size]"></div>
-                </div>
-              </template>
-              <span>{{ v.tips }}</span>
-            </n-tooltip>
-          </template>
-        </div>
+        <ToolsBar :options="ops" />
       </div>
       <div text-12px>
         <n-button

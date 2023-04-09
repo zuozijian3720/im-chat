@@ -16,13 +16,13 @@
         :class="[i != 0 && 'mt-2']"
         @click="clickChat(chat.messages[chat.messages.length - 1].id)"
       >
-        <message-view
+        <share-message-view
           v-for="(msg, i) in chat.messages.slice(0, 4)"
           :key="msg.id"
           :class="[i != 0 && 'mt-2']"
           :message="msg"
           short
-        ></message-view>
+        ></share-message-view>
         <ForkedMessage :chat="chat" />
       </div>
     </div>
@@ -31,8 +31,8 @@
 
 <script setup lang="ts">
 import { injectTreeChat } from "../logic/TreeChat";
-import MessageView from "./MessageView.vue";
 import ForkedMessage from "./ForkedMessage.vue";
+import ShareMessageView from "./ShareMessageView.vue";
 
 const treeChat = injectTreeChat();
 
