@@ -1,0 +1,8 @@
+.primary-bg {
+  background-color: rgb(243, 244, 246);
+}
+
+.primary-bg-blur {
+  background-color: rgb(243, 244, 246, 0.7);
+  backdrop-filter: saturate(180%) blur(5px);
+}

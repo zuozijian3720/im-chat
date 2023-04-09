@@ -22,7 +22,7 @@ const themeOverrides: GlobalThemeOverrides = {
     infoColorHover: "#CCCCCCFF",
     infoColorPressed: "#A3A3A3FF",
     infoColorSuppl: "#A3A3A3FF",
-    placeholderColor: "rgba(147, 147, 147, 1)",
+    placeholderColor: "rgb(190,184,184)",
     successColor: "#00E86DFF",
     successColorHover: "#47FF9DFF",
     successColorPressed: "#00E86DFF",

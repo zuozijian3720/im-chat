@@ -12,6 +12,7 @@
     rd-2
     cursor="pointer"
     @click="clickChat(chat.messages[chat.messages.length - 1].id)"
+    shadow
   >
     <share-message-view
       v-for="(msg, i) in chat.messages.slice(0, 4)"

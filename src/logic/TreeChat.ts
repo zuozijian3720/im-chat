@@ -202,6 +202,20 @@ const useTreeChat = () => {
     const node = treeChat.value[id];
     return node.setting;
   };
+  const currentPrompt = computed(() => {
+    if (!current.value) {
+      return [];
+    }
+    return getBeforeChat(current.value);
+  });
+  const currentChats = computed(() =>
+    current.value ? getAfterChatList(current.value) : []
+  );
+  const historyList = computed(() => getAfterChatList());
+  const isRoot = computed(() => current.value == null);
+  const currentMessage = computed(() =>
+    current.value ? treeChat.value[current.value] : undefined
+  );
   return {
     newMessage,
     getAnswer,
@@ -213,7 +227,11 @@ const useTreeChat = () => {
     config,
     deleteMessage,
     getSetting,
-    rootList: computed(() => getAfterChatList()),
+    isRoot,
+    historyList,
+    currentChats,
+    currentPrompt,
+    currentMessage,
     isExist(id: string) {
       return !!treeChat.value[id];
     },

@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import "uno.css";
+import "./main.scss";
 import {
   create,
   NAvatar,

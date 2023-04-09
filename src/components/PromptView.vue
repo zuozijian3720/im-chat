@@ -1,5 +1,5 @@
 <template>
-  <div h-full flex flex-col bg-gray-100>
+  <div h-full flex flex-col class="primary-bg">
     <div shrink-0 p-2 flex items-center justify-between>
       <n-button round size="tiny" @click="chat.current.value = undefined">
         <template #icon>
@@ -11,7 +11,7 @@
       <div></div>
     </div>
     <div flex-1 overflow-y-scroll overflow-x-hidden p-2>
-      <div p-2 bg-white rd-2>
+      <div p-2 bg-white rd-2 shadow>
         <message-view
           :class="[i != 0 && 'mt-2']"
           v-for="(msg, i) in beforeList"
