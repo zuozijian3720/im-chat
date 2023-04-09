@@ -29,12 +29,16 @@ const showInfo = () => {
     <span class="box" h-1 w-max flex items-center style="opacity: 0.3">
       <span
         v-if="gptInfo?.model"
-        :style="colorful && `color:${modelsColor[gptInfo.model]}`"
+        :style="colorful ? `color:${modelsColor[gptInfo.model]}` : undefined"
         >{{ gptInfo?.model.toUpperCase() }}</span
       >
       <span
         v-if="gptInfo?.temperature != null"
-        :style="colorful && `color:${temperatureColors[gptInfo.temperature]}`"
+        :style="
+          colorful
+            ? `color:${temperatureColors[gptInfo.temperature]}`
+            : undefined
+        "
         >{{ gptInfo?.temperature.toString() }}℃</span
       >
       <span v-if="gptInfo?.totalTime"

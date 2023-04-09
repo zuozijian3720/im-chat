@@ -11,7 +11,11 @@ export const colors = ["#f5a623", "#212121", "#9d9d9d"] as const;
 export const modelsColor = Object.fromEntries(
   models.map((v, i) => [v, colors[i] ?? colors[colors.length - 1]])
 );
-export const temperatureMarks = { 0: "稳定", 0.7: "聊天", 2: "瞎扯淡" };
+export const temperatureMarks: Record<number, string> = {
+  0: "稳定",
+  0.7: "聊天",
+  2: "瞎扯淡",
+};
 export const temperatureColors = gradientColors("#2860da", "#fe0106", 21);
 export type GPTModel = (typeof models)[number];
 export type GPTResponse = {

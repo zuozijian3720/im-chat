@@ -2,7 +2,7 @@
   <div shrink-0 p-6px flex flex-col transition-all ref="containerRef">
     <div mb-1 flex>
       <n-dropdown
-        @select="(v) => (setting.model = v)"
+        @select="(v:GPTModel) => (setting.model = v)"
         trigger="click"
         :options="modelOps"
         size="small"
@@ -43,7 +43,7 @@
           :max="2"
           :step="0.1"
           style="width: 300px"
-          :format-tooltip="(v) => `${v}℃`"
+          :format-tooltip="(v:number) => `${v}℃`"
         >
         </n-slider>
       </n-popover>
@@ -62,7 +62,6 @@
         maxRows: 15,
       }"
       :placeholder="noAPIKey ? '请先设置 APIKey' : '你好！'"
-      @blur="blur"
       @keydown="inputHotKey($event)"
       style="background-color: transparent"
     >
@@ -111,6 +110,7 @@ import { injectTreeChat, MessageNode } from "../../logic/TreeChat";
 import { computed, h, ref, watch } from "vue";
 import isHotkey from "is-hotkey";
 import {
+  GPTModel,
   models,
   modelsColor,
   temperatureColors,
