@@ -1,7 +1,7 @@
 <template>
   <div h-full flex flex-col class="primary-bg">
     <div shrink-0 p-2 flex items-center justify-between>
-      <n-button round size="tiny" @click="chat.current.value = undefined">
+      <n-button round size="tiny" @click="back">
         <template #icon>
           <div class="i-material-symbols-arrow-back-rounded"></div>
         </template>
@@ -34,6 +34,9 @@ const beforeList = computed(() => {
     return chat.getBeforeChat(chat.current.value);
   }
 });
+const back = () => {
+  chat.current.value = undefined;
+};
 </script>
 
 <style scoped></style>
