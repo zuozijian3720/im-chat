@@ -1,5 +1,12 @@
 <template>
   <div flex flex-col class="primary-bg" overflow-hidden h-screen>
+    <div flex items-center justify-between>
+      <div></div>
+      <div></div>
+      <div>
+        <div @click.prevent.stop="jumpToSetting">setting</div>
+      </div>
+    </div>
     <div overflow-y-scroll overflow-x-hidden flex-1 flex flex-col p-2>
       <ChatBlock
         :class="[i != 0 && 'mt-2']"
@@ -9,9 +16,6 @@
       />
     </div>
     <input-panel></input-panel>
-    <!--    <div @click="newChat" shadow m-2 flex items-center justify-center py-2 rd-1 bg-dark-50 text-white>-->
-    <!--      新聊天-->
-    <!--    </div>-->
   </div>
 </template>
 
@@ -19,8 +23,15 @@
 import { injectTreeChat } from "chat-logic";
 import ChatBlock from "./ChatBlock.vue";
 import InputPanel from "../chat/InputPanel.vue";
+import { useRouter } from "vue-router";
 
 const treeChat = injectTreeChat();
+const router = useRouter();
+const jumpToSetting = () => {
+  router.push({
+    path: "/setting",
+  });
+};
 </script>
 
 <style scoped></style>

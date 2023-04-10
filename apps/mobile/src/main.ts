@@ -6,10 +6,12 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Share from "./Share.vue";
 import HistoryPanel from "./components/history/HistoryPanel.vue";
 import ChatView from "./components/chat/ChatView.vue";
+import SettingPanel from "./components/setting/SettingPanel.vue";
 
 const routes: RouteRecordRaw[] = [
   { path: "/", component: HistoryPanel },
   { path: "/chat", component: ChatView },
+  { path: "/setting", component: SettingPanel },
   { path: "/share", component: Share },
 ];
 const router = createRouter({

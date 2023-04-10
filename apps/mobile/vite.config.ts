@@ -29,7 +29,7 @@ export default defineConfig({
         name: "IM Chat",
         short_name: "IM Chat",
         description: "A chat tool",
-        theme_color: "#ffffff",
+        theme_color: "#F3F4F6",
         icons: [
           {
             src: "icon_192.png",

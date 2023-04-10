@@ -1,15 +1,22 @@
 <template>
   <div shrink-0 p-6px flex flex-col transition-all ref="containerRef">
-    <textarea
-      :disabled="noAPIKey"
-      ref="inputRef"
-      v-model.trim="text"
-      autofocus
-      width="100%"
-      :placeholder="noAPIKey ? '请先设置 APIKey' : '你好！'"
-      @keydown.exact.enter.prevent="sendMessage"
-      style="background-color: transparent"
-    ></textarea>
+    <div flex flex-col shadow rd="1" bg="white" p-2>
+      <textarea
+        outline="none"
+        b="none"
+        p="0"
+        :disabled="noAPIKey"
+        rows="1"
+        ref="inputRef"
+        v-model.trim="text"
+        autofocus
+        width="100%"
+        :placeholder="noAPIKey ? '请先设置 APIKey' : '你好！'"
+        @keydown.exact.enter.prevent="sendMessage"
+        style="background-color: transparent; resize: none"
+      ></textarea>
+    </div>
+    <div style="height: env(safe-area-inset-bottom)"></div>
   </div>
 </template>
 <script lang="ts" setup>

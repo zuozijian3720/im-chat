@@ -17,6 +17,9 @@ const messageChain = chat.messageChain;
 </script>
 <template>
   <div flex flex-col overflow-hidden relative h-screen>
+    <div flex justify-center py="2" class="primary-bg" shadow>
+      <div font-bold select-none>Chat</div>
+    </div>
     <div ref="scrollContainer" flex-1 overflow-y-scroll overflow-x-hidden>
       <div p-2>
         <message-view
