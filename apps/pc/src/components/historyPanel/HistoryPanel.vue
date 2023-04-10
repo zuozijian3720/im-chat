@@ -17,8 +17,11 @@
 <script setup lang="ts">
 import { injectTreeChat } from "chat-logic";
 import ChatBlock from "./ChatBlock.vue";
-
+import { onMounted } from "vue";
 const treeChat = injectTreeChat();
+onMounted(() => {
+  treeChat.current.value = undefined;
+});
 </script>
 
 <style scoped></style>

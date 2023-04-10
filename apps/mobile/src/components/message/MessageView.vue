@@ -52,7 +52,7 @@ watch(hover, (hover) => {
       <info-box :message="message"></info-box>
       <div text-12px>
         <div v-if="short" whitespace="nowrap" text-ellipsis overflow-hidden>
-          {{ message.message.content }}
+          {{ message.message.content }}<span inline-block h="1em"></span>
         </div>
         <span v-else whitespace="pre-wrap"
           >{{ message.message.content }}<span inline-block h="1em"></span

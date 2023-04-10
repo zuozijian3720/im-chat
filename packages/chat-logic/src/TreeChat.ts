@@ -43,7 +43,7 @@ export const injectTreeChat = () => {
   return inject("treeChat") as ReturnType<typeof provideTreeChat>;
 };
 const useTreeChat = () => {
-  const current = ref<string>();
+  const current = ref<string | undefined>();
   const roots = useStorageAsync<string[]>("treeRoots", [], localStorage, {
     deep: true,
   });

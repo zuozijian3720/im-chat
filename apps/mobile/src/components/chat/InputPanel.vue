@@ -15,6 +15,7 @@
 <script lang="ts" setup>
 import { injectTreeChat } from "chat-logic";
 import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 
 const chat = injectTreeChat();
 const text = ref<string>("");
@@ -24,18 +25,26 @@ const messageChain = chat.messageChain;
 const lastMessage = computed(
   () => messageChain.value[messageChain.value.length - 1]
 );
+const router = useRouter();
 const sendMessage = () => {
   if (!text.value) {
     return;
   }
-  const current = chat.currentMessage.value;
-  if (!current) {
-    return;
-  }
   //chat model
   const lastMessage = messageChain.value[messageChain.value.length - 1];
-  const msg = chat.newMessage("user", text.value, { parent: lastMessage.id });
-  chat.getAnswer(msg.id, chat.getSetting(current.id));
+  if (!lastMessage) {
+    const msg = chat.newMessage("user", text.value);
+    chat.getAnswer(msg.id);
+    router.push({
+      path: "chat",
+      query: {
+        id: msg.id,
+      },
+    });
+  } else {
+    const msg = chat.newMessage("user", text.value, { parent: lastMessage.id });
+    chat.getAnswer(msg.id, lastMessage.setting);
+  }
   text.value = "";
 };
 const containerRef = ref<HTMLDivElement>();
