@@ -1,5 +1,5 @@
 <template>
-  <div>im chat</div>
+  <div>im chat test</div>
 </template>
 
 <script setup lang="ts"></script>
