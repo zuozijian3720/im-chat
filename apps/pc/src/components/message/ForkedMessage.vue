@@ -27,7 +27,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { Chat } from "../../logic/TreeChat";
+import { Chat } from "chat-logic";
 import MessageView from "./MessageView.vue";
 
 defineProps<{ chat: Chat }>();

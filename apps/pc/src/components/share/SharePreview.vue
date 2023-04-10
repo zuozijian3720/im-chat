@@ -12,7 +12,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { MessageNode } from "../../logic/TreeChat";
+import { MessageNode } from "chat-logic";
 import ShareMessageView from "../message/ShareMessageView.vue";
 
 defineProps<{

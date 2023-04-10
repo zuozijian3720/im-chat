@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { provideTreeChat } from "./logic/TreeChat";
+import { provideTreeChat } from "chat-logic";
 
 const chat = provideTreeChat();
 </script>

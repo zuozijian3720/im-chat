@@ -106,16 +106,17 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { injectTreeChat, MessageNode } from "../../logic/TreeChat";
-import { computed, h, ref, watch } from "vue";
-import isHotkey from "is-hotkey";
 import {
   GPTModel,
+  injectTreeChat,
+  MessageNode,
   models,
   modelsColor,
   temperatureColors,
   temperatureMarks,
-} from "../../utils/chatApi";
+} from "chat-logic";
+import { computed, h, ref, watch } from "vue";
+import isHotkey from "is-hotkey";
 import { useElementSize } from "@vueuse/core";
 import { inputPanelHeight } from "../../utils/inputPanelHeight";
 

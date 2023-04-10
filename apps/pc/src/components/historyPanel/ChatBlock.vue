@@ -33,7 +33,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { Chat, injectTreeChat } from "../../logic/TreeChat";
+import { Chat, injectTreeChat } from "chat-logic";
 import ShareMessageView from "../message/ShareMessageView.vue";
 import ForkedMessage from "../message/ForkedMessage.vue";
 import { ref } from "vue";

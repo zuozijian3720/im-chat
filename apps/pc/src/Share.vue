@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { injectTreeChat, MessageNode } from "./logic/TreeChat";
+import { injectTreeChat, MessageNode } from "chat-logic";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
 

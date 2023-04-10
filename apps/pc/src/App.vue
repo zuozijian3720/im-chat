@@ -6,7 +6,7 @@ import {
   NMessageProvider,
   NNotificationProvider,
 } from "naive-ui";
-import { provideTreeChat } from "./logic/TreeChat";
+import { provideTreeChat } from "chat-logic";
 
 const chat = provideTreeChat();
 const themeOverrides: GlobalThemeOverrides = {

@@ -16,7 +16,7 @@ import { computed } from "vue";
 import RootView from "./components/historyPanel/HistoryPanel.vue";
 import BeforeView from "./components/PromptView.vue";
 import AfterView from "./components/chat/ChatView.vue";
-import { injectTreeChat } from "./logic/TreeChat";
+import { injectTreeChat } from "chat-logic";
 
 const chat = injectTreeChat();
 const isRoot = computed(() => {

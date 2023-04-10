@@ -42,7 +42,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { injectTreeChat } from "../logic/TreeChat";
+import { injectTreeChat } from "chat-logic";
 import { ref } from "vue";
 
 const chat = injectTreeChat();

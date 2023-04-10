@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { injectTreeChat } from "../../logic/TreeChat";
+import { injectTreeChat } from "chat-logic";
 import ChatBlock from "./ChatBlock.vue";
 
 const treeChat = injectTreeChat();

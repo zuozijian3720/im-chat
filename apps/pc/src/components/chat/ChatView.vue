@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { injectTreeChat } from "../../logic/TreeChat";
+import { injectTreeChat } from "chat-logic";
 import MessageView from "../message/MessageView.vue";
 import ForkedMessage from "../message/ForkedMessage.vue";
 import MainPanel from "../MainPanel.vue";

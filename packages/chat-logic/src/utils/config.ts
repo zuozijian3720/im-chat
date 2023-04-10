@@ -1,5 +1,6 @@
 import { RemovableRef, useStorageAsync } from "@vueuse/core";
-import { GPTModel } from "./chatApi";
+
+import { GPTModel } from "../Enums";
 
 export type GlobalConfig = {
   model: GPTModel;

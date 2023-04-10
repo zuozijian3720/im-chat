@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev:mobile": "turbo dev --filter={apps/mobile}",
+    "build:mobile": "turbo build --filter={apps/mobile}",
+    "dev:pc": "turbo dev --filter={apps/pc}",
+    "build:pc": "turbo build --filter={apps/pc}"
   },
   "keywords": [],
   "author": "",

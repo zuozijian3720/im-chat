@@ -1,8 +1,9 @@
 import { computed, inject, provide, reactive, Ref, ref } from "vue";
 import { nanoid } from "nanoid";
-import { GlobalConfig, useConfig } from "../utils/config";
-import { askGPT, GPTModel, Message, UserRole } from "../utils/chatApi";
+import { GlobalConfig, useConfig } from "./utils/config";
+import { askGPT, Message, UserRole } from "./utils/chatApi";
 import { useStorageAsync } from "@vueuse/core";
+import { GPTModel } from "./Enums";
 
 type GPTInfo = {
   model: GPTModel;

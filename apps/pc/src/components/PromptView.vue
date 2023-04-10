@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { injectTreeChat } from "../logic/TreeChat";
+import { injectTreeChat } from "chat-logic";
 import { computed } from "vue";
 import MessageView from "./message/MessageView.vue";
 
