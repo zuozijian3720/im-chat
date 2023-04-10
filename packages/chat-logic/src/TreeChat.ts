@@ -15,6 +15,7 @@ export type MessageNode = {
   isNew: boolean;
   shareId?: string;
   parent?: string;
+  current?: number;
   children: string[];
   message: Message;
   abort?: AbortController;
@@ -233,6 +234,24 @@ const useTreeChat = () => {
     currentChats,
     currentPrompt,
     currentMessage,
+    messageChain: computed((): MessageNode[] => {
+      let root = currentMessage.value;
+      while (root?.parent) {
+        root = treeChat.value[root.parent];
+      }
+      if (!root) {
+        return [];
+      }
+      const messages: MessageNode[] = [];
+      while (root) {
+        messages.push(root);
+        root =
+          treeChat.value[
+            root.children[root.current ?? root.children.length - 1]
+          ];
+      }
+      return messages;
+    }),
     isExist(id: string) {
       return !!treeChat.value[id];
     },

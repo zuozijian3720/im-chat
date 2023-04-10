@@ -3,11 +3,13 @@ import "uno.css";
 import "./main.scss";
 import App from "./App.vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import ImChat from "./ImChat.vue";
 import Share from "./Share.vue";
+import HistoryPanel from "./components/history/HistoryPanel.vue";
+import ChatView from "./components/chat/ChatView.vue";
 
 const routes: RouteRecordRaw[] = [
-  { path: "/", component: ImChat },
+  { path: "/", component: HistoryPanel },
+  { path: "/chat", component: ChatView },
   { path: "/share", component: Share },
 ];
 const router = createRouter({

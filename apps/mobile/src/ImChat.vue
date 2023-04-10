@@ -1,7 +1,9 @@
 <template>
-  <div>im chat test</div>
+  <history-panel />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import HistoryPanel from "./components/history/HistoryPanel.vue";
+</script>
 
 <style scoped></style>
