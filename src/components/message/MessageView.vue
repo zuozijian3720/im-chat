@@ -22,7 +22,7 @@ const ops = [
     size: "text-18px",
     onClick: async () => {
       dialog.create({
-        style: "width:max-content",
+        style: "width:max-content;overflow:hidden",
         class: "bg-gray-100",
         title: "分享",
         icon: () => h("div", { class: "i-ph-share-network-light" }),

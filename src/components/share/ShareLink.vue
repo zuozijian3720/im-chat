@@ -97,27 +97,38 @@ const scaleStyle = computed(() => {
         />
       </div>
     </div>
-    <div flex justify-center>
-      <n-slider
-        w="600px"
-        v-model:value="previewWidth"
-        :step="5"
-        :max="1200"
-        :min="200"
-      ></n-slider>
-    </div>
-    <div overflow-y-scroll max-h="500px" flex justify-center w-full mt-4 mb-4>
-      <div>
+    <div
+      min-w="600px"
+      overflow-y-scroll
+      max-h="500px"
+      flex
+      justify-center
+      w-full
+      mt-4
+      mb-4
+    >
+      <div h-max>
         <SharePreview :message-list="messageList" :style="previewStyle" />
       </div>
     </div>
-    <n-space justify="center">
-      <n-button :loading="copyImageLoading" @click="copyImage()"
-        >分享图片
-      </n-button>
-      <n-button :loading="copyLinkLoading" @click="copyLink()"
-        >分享链接
-      </n-button>
+    <n-space w="100%" vertical justify="center" class="primary-bg-blur">
+      <n-space justify="center">
+        <n-slider
+          w="400px"
+          v-model:value="previewWidth"
+          :step="5"
+          :max="1200"
+          :min="200"
+        ></n-slider>
+      </n-space>
+      <n-space justify="center">
+        <n-button :loading="copyImageLoading" @click="copyImage()"
+          >分享图片
+        </n-button>
+        <n-button :loading="copyLinkLoading" @click="copyLink()"
+          >分享链接
+        </n-button>
+      </n-space>
     </n-space>
   </div>
 </template>
