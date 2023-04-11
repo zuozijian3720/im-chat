@@ -1,37 +1,60 @@
 <script setup lang="ts">
-import { ref, toRaw } from "vue";
+import { ref } from "vue";
 import { injectTreeChat } from "chat-logic";
 import MessageView from "../message/MessageView.vue";
 import InputPanel from "./InputPanel.vue";
 import { useRoute } from "vue-router";
+import {
+  IonContent,
+  IonPage,
+  onIonViewDidEnter,
+  onIonViewWillLeave,
+} from "@ionic/vue";
+import TitleBar from "../common/TitleBar.vue";
+import GoSetting from "../common/GoSetting.vue";
 
 const route = useRoute();
-const id = route.query.id;
 const chat = injectTreeChat();
-if (id && typeof id === "string") {
-  chat.current.value = id;
-}
 const scrollContainer = ref<HTMLDivElement>();
-
+onIonViewDidEnter(() => {
+  const id = route.query.id;
+  if (id && typeof id === "string") {
+    chat.current.value = id;
+  }
+});
+onIonViewWillLeave(() => {
+  chat.current.value = undefined;
+});
 const messageChain = chat.messageChain;
 </script>
 <template>
-  <div flex flex-col overflow-hidden relative h-screen>
-    <div flex justify-center py="2" class="primary-bg" shadow>
-      <div font-bold select-none>Chat</div>
-    </div>
-    <div ref="scrollContainer" flex-1 overflow-y-scroll overflow-x-hidden>
-      <div p-2>
-        <message-view
-          v-for="(msg, i) in messageChain"
-          :key="msg.id"
-          :class="[i != 0 && 'mt-2']"
-          :message="msg"
-        ></message-view>
+  <ion-page>
+    <TitleBar title="Chat">
+      <template #right>
+        <GoSetting />
+      </template>
+    </TitleBar>
+    <ion-content>
+      <div flex flex-col overflow-hidden relative h-full>
+        <div ref="scrollContainer" flex-1 overflow-y-scroll overflow-x-hidden>
+          <div p-2>
+            <message-view
+              v-for="(msg, i) in messageChain"
+              :key="msg.id"
+              :class="[i != 0 && 'mt-2']"
+              :message="msg"
+            ></message-view>
+          </div>
+        </div>
+        <InputPanel
+          placeholder="你好！"
+          w="100%"
+          bottom-0
+          class="primary-bg-blur"
+        />
       </div>
-    </div>
-    <InputPanel w="100%" bottom-0 class="primary-bg-blur" />
-  </div>
+    </ion-content>
+  </ion-page>
 </template>
 
 <style scoped lang="scss">

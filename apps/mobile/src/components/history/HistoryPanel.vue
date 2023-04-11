@@ -1,32 +1,44 @@
 <template>
-  <div flex flex-col class="primary-bg" overflow-hidden h-screen>
-    <div flex items-center justify-between p-4>
-      <div></div>
-      <div></div>
-      <div>
-        <div @click.prevent.stop="jumpToSetting">setting</div>
+  <ion-page>
+    <TitleBar title="Chat 历史">
+      <template #right>
+        <GoSetting />
+      </template>
+    </TitleBar>
+    <ion-content>
+      <div flex flex-col h-full>
+        <div
+          flex-col
+          flex
+          overflow-x-hidden
+          overflow-y-scroll
+          flex-1
+          p-2
+          class="primary-bg"
+        >
+          <ChatBlock
+            :class="[i != 0 && 'mt-2']"
+            v-for="(chat, i) in treeChat.historyList.value"
+            :key="i"
+            :chat="chat"
+          />
+        </div>
+        <input-panel placeholder="开启新话题"></input-panel>
       </div>
-    </div>
-    <div overflow-y-scroll overflow-x-hidden flex-1 flex flex-col p-2>
-      <ChatBlock
-        :class="[i != 0 && 'mt-2']"
-        v-for="(chat, i) in treeChat.historyList.value"
-        :key="i"
-        :chat="chat"
-      />
-    </div>
-    <input-panel></input-panel>
-  </div>
+    </ion-content>
+  </ion-page>
 </template>
 
 <script setup lang="ts">
 import { injectTreeChat } from "chat-logic";
 import ChatBlock from "./ChatBlock.vue";
 import InputPanel from "../chat/InputPanel.vue";
-import { useRouter } from "vue-router";
+import { IonContent, IonPage, useIonRouter } from "@ionic/vue";
+import TitleBar from "../common/TitleBar.vue";
+import GoSetting from "../common/GoSetting.vue";
 
 const treeChat = injectTreeChat();
-const router = useRouter();
+const router = useIonRouter();
 const jumpToSetting = () => {
   router.push({
     path: "/setting",

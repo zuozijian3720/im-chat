@@ -1,9 +1,22 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
-import { useElementHover } from "@vueuse/core";
+import { onMounted, ref } from "vue";
+import { onClickOutside, onLongPress, useElementHover } from "@vueuse/core";
 import { injectTreeChat, MessageNode } from "chat-logic";
 import InfoBox from "./InfoBox.vue";
+import { Clipboard } from "@capacitor/clipboard";
+import { toastController } from "@ionic/vue";
 
+const writeToClipboard = async () => {
+  await Clipboard.write({
+    string: props.message.message.content,
+  });
+  const toast = await toastController.create({
+    message: "复制成功",
+    position: "top",
+    duration: 1000,
+  });
+  await toast.present();
+};
 const props = defineProps<{
   message: MessageNode;
   short?: boolean;
@@ -18,15 +31,66 @@ onMounted(() => {
     container.value?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 });
-const toolsRef = ref<HTMLDivElement>();
-watch(hover, (hover) => {
-  const ele = toolsRef.value;
-  if (ele && hover) {
-    if (ele.offsetLeft < 0) {
-      ele.style.right = `-${ele.offsetWidth - 18}px`;
-    }
+const showToolsBox = ref<{ x: number; y: number }>();
+const toolsBoxRef = ref<HTMLDivElement>();
+onLongPress(container, (evt) => {
+  showToolsBox.value = {
+    x: evt.x,
+    y: evt.y,
+  };
+  if (container.value) {
+    const selection = getSelection();
+    selection.removeAllRanges();
+    const range = new Range();
+    range.selectNodeContents(container.value);
+    selection.addRange(range);
   }
 });
+
+onClickOutside(toolsBoxRef, () => {
+  showToolsBox.value = undefined;
+});
+const tools = (
+  [
+    {
+      name: "复制",
+      click: () => {
+        writeToClipboard();
+      },
+    },
+    {
+      name: "分享",
+      click: async () => {
+        const toast = await toastController.create({
+          message: "功能未实现",
+          position: "top",
+          duration: 1000,
+        });
+        await toast.present();
+      },
+    },
+    {
+      name: "删除",
+      click: async () => {
+        const toast = await toastController.create({
+          message: "功能未实现",
+          position: "top",
+          duration: 1000,
+        });
+        await toast.present();
+      },
+    },
+  ] satisfies Array<{
+    name: string;
+    click: () => void;
+  }>
+).map((v) => ({
+  ...v,
+  click: () => {
+    v.click();
+    showToolsBox.value = undefined;
+  },
+}));
 </script>
 <template>
   <div
@@ -60,6 +124,27 @@ watch(hover, (hover) => {
         <span class="ping" v-if="message.abort" text-gray-300></span>
       </div>
     </div>
+    <Teleport to="body">
+      <div
+        v-if="showToolsBox"
+        :style="`left:${showToolsBox.x}px;top:${showToolsBox.y}px`"
+        ref="toolsBoxRef"
+        absolute
+        shadow
+        rd-1
+        bg-white=""
+      >
+        <div
+          v-for="(tool, i) in tools"
+          :key="i"
+          py-2
+          px-4
+          @click="tool.click()"
+        >
+          {{ tool.name }}
+        </div>
+      </div>
+    </Teleport>
   </div>
 </template>
 <style lang="scss">

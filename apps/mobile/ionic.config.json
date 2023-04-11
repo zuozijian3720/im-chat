@@ -1,0 +1,7 @@
+{
+  "name": "im-chat-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

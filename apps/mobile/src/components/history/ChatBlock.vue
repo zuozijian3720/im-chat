@@ -23,12 +23,12 @@ import { Chat, injectTreeChat } from "chat-logic";
 import ShareMessageView from "../message/ShareMessageView.vue";
 import ForkedMessage from "../message/ForkedMessage.vue";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { useIonRouter } from "@ionic/vue";
 
 const props = defineProps<{
   chat: Chat;
 }>();
-const router = useRouter();
+const router = useIonRouter();
 const jumpTo = (id: string) => {
   router.push({
     path: "/chat",

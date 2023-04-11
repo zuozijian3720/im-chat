@@ -1,21 +1,22 @@
 import { createApp } from "vue";
 import "uno.css";
 import "./main.scss";
-import App from "./App.vue";
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Share from "./Share.vue";
-import HistoryPanel from "./components/history/HistoryPanel.vue";
-import ChatView from "./components/chat/ChatView.vue";
-import SettingPanel from "./components/setting/SettingPanel.vue";
+import AppView from "./App.vue";
+import { IonicVue } from "@ionic/vue";
+import { router } from "./router";
+import { App } from "@capacitor/app";
+import { StatusBar, Style } from "@capacitor/status-bar";
 
-const routes: RouteRecordRaw[] = [
-  { path: "/", component: HistoryPanel },
-  { path: "/chat", component: ChatView },
-  { path: "/setting", component: SettingPanel },
-  { path: "/share", component: Share },
-];
-const router = createRouter({
-  history: createWebHistory(),
-  routes,
+StatusBar.setBackgroundColor({ color: "#f3f4f6" });
+StatusBar.setStyle({ style: Style.Light });
+App.addListener("backButton", (event) => {
+  if (event.canGoBack) {
+    router.back();
+  } else {
+    App.minimizeApp();
+  }
 });
-createApp(App).use(router).mount("#app");
+const app = createApp(AppView).use(IonicVue).use(router);
+router.isReady().then(() => {
+  app.mount("#app");
+});
