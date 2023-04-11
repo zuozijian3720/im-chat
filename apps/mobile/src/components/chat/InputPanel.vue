@@ -1,5 +1,5 @@
 <template>
-  <div shrink-0 p-6px flex flex-col transition-all ref="containerRef">
+  <div shrink-0 p-4 flex flex-col transition-all ref="containerRef">
     <div flex flex-col shadow rd="1" bg="white" p-2>
       <textarea
         outline="none"

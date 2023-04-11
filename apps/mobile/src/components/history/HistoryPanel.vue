@@ -1,6 +1,6 @@
 <template>
   <div flex flex-col class="primary-bg" overflow-hidden h-screen>
-    <div flex items-center justify-between>
+    <div flex items-center justify-between p-4>
       <div></div>
       <div></div>
       <div>

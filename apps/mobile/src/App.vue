@@ -6,8 +6,4 @@ const chat = provideTreeChat();
 <template>
   <router-view></router-view>
 </template>
-<style>
-div {
-  box-sizing: border-box;
-}
-</style>
+<style></style>
