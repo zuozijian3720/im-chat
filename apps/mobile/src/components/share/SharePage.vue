@@ -139,10 +139,7 @@ const scaleStyle = computed(() => {
         </div>
         <div w="100%" flex flex-col="" justify="center" pb-4 pt-2>
           <div justify="center" flex>
-            <ion-button
-              size="small"
-              :loading="copyImageLoading"
-              @click="copyImage()"
+            <ion-button :loading="copyImageLoading" @click="copyImage()"
               >分享图片
             </ion-button>
             <!--            <ion-button-->

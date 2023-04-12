@@ -6,22 +6,22 @@
     transition-all
     ref="containerRef"
     px-6
-    py-2
+    pt-2
+    pb-4
     class="primary-bg"
     shadow
   >
-    <div flex flex-col rd="1" bg="white" text-18px p-2>
-      <div
-        v-if="noAPIKey"
-        @click="goSetting"
-        flex
-        items-center=""
-        justify-center
-      >
-        点击去设置 API Key
-      </div>
+    <ion-button v-if="noAPIKey" @click="goSetting()">
+      去设置 API Key</ion-button
+    >
+    <ion-button
+      v-else-if="currentMessage && currentMessage.abort"
+      @click="abort()"
+    >
+      取消
+    </ion-button>
+    <div v-else flex flex-col rd="1" bg="white" text-18px p-2>
       <textarea
-        v-else
         outline="none"
         b="none"
         p="0"
@@ -54,13 +54,16 @@ const messageChain = chat.messageChain;
 const lastMessage = computed(
   () => messageChain.value[messageChain.value.length - 1]
 );
+const currentMessage = computed(() => {
+  return messageChain.value[messageChain.value.length - 1];
+});
 const router = useIonRouter();
 const sendMessage = () => {
   if (!text.value) {
     return;
   }
   //chat model
-  const lastMessage = messageChain.value[messageChain.value.length - 1];
+  const lastMessage = currentMessage.value;
   if (!lastMessage) {
     const msg = chat.newMessage("user", text.value);
     chat.getAnswer(msg.id);
