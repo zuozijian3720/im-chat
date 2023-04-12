@@ -4,8 +4,9 @@ import { onClickOutside, onLongPress, useElementHover } from "@vueuse/core";
 import { injectTreeChat, MessageNode } from "chat-logic";
 import InfoBox from "./InfoBox.vue";
 import { Clipboard } from "@capacitor/clipboard";
-import { toastController } from "@ionic/vue";
+import { toastController, useIonRouter } from "@ionic/vue";
 
+const router = useIonRouter();
 const writeToClipboard = async () => {
   await Clipboard.write({
     string: props.message.message.content,
@@ -38,13 +39,13 @@ onLongPress(container, (evt) => {
     x: evt.x,
     y: evt.y,
   };
-  if (container.value) {
-    const selection = getSelection();
-    selection.removeAllRanges();
-    const range = new Range();
-    range.selectNodeContents(container.value);
-    selection.addRange(range);
-  }
+  // if (container.value) {
+  //   const selection = getSelection();
+  //   selection.removeAllRanges();
+  //   const range = new Range();
+  //   range.selectNodeContents(container.value);
+  //   selection.addRange(range);
+  // }
 });
 
 onClickOutside(toolsBoxRef, () => {
@@ -61,12 +62,12 @@ const tools = (
     {
       name: "分享",
       click: async () => {
-        const toast = await toastController.create({
-          message: "功能未实现",
-          position: "top",
-          duration: 1000,
+        router.push({
+          path: "/share",
+          query: {
+            id: props.message.id,
+          },
         });
-        await toast.present();
       },
     },
     {

@@ -1,4 +1,4 @@
-import { computed, inject, provide, reactive, Ref, ref } from "vue";
+import { computed, inject, provide, reactive, Ref, ref, toRaw } from "vue";
 import { nanoid } from "nanoid";
 import { GlobalConfig, useConfig } from "./utils/config";
 import { askGPT, Message, UserRole } from "./utils/chatApi";
@@ -259,6 +259,9 @@ const useTreeChat = () => {
       data.forEach((msg) => {
         treeChat.value[msg.id] = msg;
       });
+    },
+    getMessage(id: string): MessageNode {
+      return treeChat.value[id];
     },
   };
 };

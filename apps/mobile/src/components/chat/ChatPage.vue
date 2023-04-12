@@ -2,12 +2,12 @@
 import { ref } from "vue";
 import { injectTreeChat } from "chat-logic";
 import MessageView from "../message/MessageView.vue";
-import InputPanel from "./InputPanel.vue";
+import InputPanel from "../common/InputPanel.vue";
 import { useRoute } from "vue-router";
 import {
   IonContent,
   IonPage,
-  onIonViewDidEnter,
+  onIonViewWillEnter,
   onIonViewWillLeave,
 } from "@ionic/vue";
 import TitleBar from "../common/TitleBar.vue";
@@ -16,7 +16,7 @@ import GoSetting from "../common/GoSetting.vue";
 const route = useRoute();
 const chat = injectTreeChat();
 const scrollContainer = ref<HTMLDivElement>();
-onIonViewDidEnter(() => {
+onIonViewWillEnter(() => {
   const id = route.query.id;
   if (id && typeof id === "string") {
     chat.current.value = id;

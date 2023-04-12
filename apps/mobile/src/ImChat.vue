@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import HistoryPanel from "./components/history/HistoryPanel.vue";
+import HistoryPanel from "./components/history/HistoryPage.vue";
 </script>
 
 <style scoped></style>

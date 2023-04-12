@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { injectTreeChat } from "chat-logic";
 import ChatBlock from "./ChatBlock.vue";
-import InputPanel from "../chat/InputPanel.vue";
+import InputPanel from "../common/InputPanel.vue";
 import { IonContent, IonPage, useIonRouter } from "@ionic/vue";
 import TitleBar from "../common/TitleBar.vue";
 import GoSetting from "../common/GoSetting.vue";

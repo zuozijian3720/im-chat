@@ -21,6 +21,7 @@ importers:
       "@capacitor/cli": ^4.7.3
       "@capacitor/clipboard": ^4.1.0
       "@capacitor/core": ^4.7.3
+      "@capacitor/filesystem": ^4.1.4
       "@capacitor/ios": ^4.7.3
       "@capacitor/status-bar": ^4.1.1
       "@iconify/json": ^2.2.36
@@ -43,6 +44,7 @@ importers:
       sass: ^1.59.3
       typescript: ^5.0.4
       unocss: ^0.50.6
+      vconsole: ^3.15.0
       vite: ^4.1.0
       vite-plugin-pwa: ^0.14.7
       vue: ^3.2.45
@@ -53,6 +55,7 @@ importers:
       "@capacitor/app": 4.1.1_@capacitor+core@4.7.3
       "@capacitor/clipboard": 4.1.0_@capacitor+core@4.7.3
       "@capacitor/core": 4.7.3
+      "@capacitor/filesystem": 4.1.4_@capacitor+core@4.7.3
       "@capacitor/ios": 4.7.3_@capacitor+core@4.7.3
       "@capacitor/status-bar": 4.1.1_@capacitor+core@4.7.3
       "@ionic/vue": 7.0.1
@@ -66,6 +69,7 @@ importers:
       nanoid: 4.0.2
       sass: 1.61.0
       unocss: 0.50.8_vite@4.2.1
+      vconsole: 3.15.0
       vue: 3.2.47
       vue-router: 4.1.6_vue@3.2.47
     devDependencies:
@@ -1597,7 +1601,6 @@ packages:
     engines: { node: ">=6.9.0" }
     dependencies:
       regenerator-runtime: 0.13.11
-    dev: true
 
   /@babel/template/7.20.7:
     resolution:
@@ -1769,6 +1772,17 @@ packages:
       }
     dependencies:
       tslib: 2.5.0
+    dev: false
+
+  /@capacitor/filesystem/4.1.4_@capacitor+core@4.7.3:
+    resolution:
+      {
+        integrity: sha512-ivko1RNK4hq63xhMacq8D6D97N5/SAafTsrmY/pghYrG6Cl2SEY0+IgRu7V9/VWeN3FSplyUPucjUTAFQxXN5g==,
+      }
+    peerDependencies:
+      "@capacitor/core": ^4.0.0
+    dependencies:
+      "@capacitor/core": 4.7.3
     dev: false
 
   /@capacitor/ios/4.7.3_@capacitor+core@4.7.3:
@@ -4378,6 +4392,14 @@ packages:
       }
     dev: true
 
+  /copy-text-to-clipboard/3.1.0:
+    resolution:
+      {
+        integrity: sha512-PFM6BnjLnOON/lB3ta/Jg7Ywsv+l9kQGD4TWDCSlRBGmqnnTM5MrDkhAFgw+8HZt0wW6Q2BBE4cmy9sq+s9Qng==,
+      }
+    engines: { node: ">=12" }
+    dev: false
+
   /core-js-compat/3.30.0:
     resolution:
       {
@@ -4386,6 +4408,14 @@ packages:
     dependencies:
       browserslist: 4.21.5
     dev: true
+
+  /core-js/3.30.0:
+    resolution:
+      {
+        integrity: sha512-hQotSSARoNh1mYPi9O2YaWeiq/cEB95kOrFb4NCrO4RIFt1qqNpKsaE+vy/L3oiqvND5cThqXzUU3r9F7Efztg==,
+      }
+    requiresBuild: true
+    dev: false
 
   /core-util-is/1.0.3:
     resolution:
@@ -7233,6 +7263,13 @@ packages:
       }
     dev: true
 
+  /mutation-observer/1.0.3:
+    resolution:
+      {
+        integrity: sha512-M/O/4rF2h776hV7qGMZUH3utZLO/jK7p8rnNgGkjKUw8zCGjRQPxB8z6+5l8+VjRUQ3dNYu4vjqXYLr+U8ZVNA==,
+      }
+    dev: false
+
   /mute-stream/0.0.8:
     resolution:
       {
@@ -8245,7 +8282,6 @@ packages:
       {
         integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==,
       }
-    dev: true
 
   /regenerator-transform/0.15.1:
     resolution:
@@ -9828,6 +9864,18 @@ packages:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
     dev: true
+
+  /vconsole/3.15.0:
+    resolution:
+      {
+        integrity: sha512-8hq7wabPcRucSWQyN7/1tthMawP9JPvM95zgtMHpPknMMMCKj+abpoK7P7oKK4B0qw58C24Mdvo9+raUdpHyVQ==,
+      }
+    dependencies:
+      "@babel/runtime": 7.21.0
+      copy-text-to-clipboard: 3.1.0
+      core-js: 3.30.0
+      mutation-observer: 1.0.3
+    dev: false
 
   /vdirs/0.1.8_vue@3.2.47:
     resolution:

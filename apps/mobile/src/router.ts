@@ -1,9 +1,9 @@
 import { RouteRecordRaw } from "vue-router";
-import HistoryPanel from "./components/history/HistoryPanel.vue";
-import ChatView from "./components/chat/ChatView.vue";
-import SettingPanel from "./components/setting/SettingPanel.vue";
-import Share from "./Share.vue";
+import HistoryPage from "./components/history/HistoryPage.vue";
+import ChatPage from "./components/chat/ChatPage.vue";
+import SettingPage from "./components/setting/SettingPage.vue";
 import { createRouter, createWebHistory } from "@ionic/vue-router";
+import SharePage from "./components/share/SharePage.vue";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -13,22 +13,22 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/history",
     name: "History",
-    component: HistoryPanel,
+    component: HistoryPage,
   },
   {
     path: "/chat",
     name: "Chat",
-    component: ChatView,
+    component: ChatPage,
   },
   {
     path: "/setting",
     name: "Setting",
-    component: SettingPanel,
+    component: SettingPage,
   },
   {
     path: "/share",
     name: "Share",
-    component: Share,
+    component: SharePage,
   },
 ];
 export const router = createRouter({

@@ -6,7 +6,9 @@ import { IonicVue } from "@ionic/vue";
 import { router } from "./router";
 import { App } from "@capacitor/app";
 import { StatusBar, Style } from "@capacitor/status-bar";
+import VConsole from "vconsole";
 
+const vConsole = new VConsole();
 StatusBar.setBackgroundColor({ color: "#f3f4f6" });
 StatusBar.setStyle({ style: Style.Light });
 App.addListener("backButton", (event) => {
